@@ -33,10 +33,12 @@
   v-for 문법을 이용해 지금 있는 상품목록을 반복문으로 축약해보십시오.
 
   가격은 신경쓰지말고 상품제목만 잘 보이면 됩니다. -->
-  <div v-for="(value, i) in products" :key="value">
-    <img :src="`src/assets/room${i}.jpg`" :alt="i" class="room-img">
-    <h4 @click="모달창열렸니 = true">{{ value }}</h4>
-    <p>50 만원</p>
+  <div v-for="value in 원룸들" :key="value">
+    <!-- <img :src="`src/assets/room${i}.jpg`" :alt="i" class="room-img"> -->
+    <img :src="value.image" :alt="value.id" class="room-img">
+    <!-- <h4 @click="모달창열렸니 = true">{{ value }}</h4> -->
+    <h4 @click="모달창열렸니 = true">{{ value.title }}</h4>
+    <p>{{ value.price }}</p>
     <!-- 오늘의 5분 숙제 : 
 
     모든 상품에 신고버튼과 기능을 만들어오십시오.
@@ -55,6 +57,8 @@
 // var 어레이 = [10,20,30];
 // 어레이[0]
 
+import oneroomdata from './assets/oneroom.js';
+
 export default {
   name : 'App',
   data() {
@@ -68,6 +72,8 @@ export default {
       메뉴들 : ['Home', 'Shop', 'About'],
       신고수 : [0, 0, 0],
       모달창열렸니 : false,
+      원룸들 : oneroomdata,
+
     }
   },
   methods: {
