@@ -1,9 +1,11 @@
 <template>
 
-  <Modal @closeModal="모달창열렸니=false" 
-  :원룸들="원룸들" 
-  :상세페이지아이디="상세페이지아이디" 
-  :모달창열렸니="모달창열렸니"/>
+  <Transition name="fade">
+    <Modal @closeModal="모달창열렸니=false" 
+    :원룸들="원룸들" 
+    :상세페이지아이디="상세페이지아이디" 
+    :모달창열렸니="모달창열렸니"/>
+  </Transition>
 
   <div class="menu">
     <a v-for="작명 in 메뉴들" :key="작명">{{ 작명 }}</a>
@@ -15,6 +17,14 @@
   <!-- 컴포넌트 -->
   <Discount/>
 
+  <button @click="Ascending">오름차순</button>
+  <!-- 오늘의 5분 숙제 :
+  가격 낮은순 정렬 - 완성
+  가격 높은 순정렬 - ?
+  상품명 가나다순 정렬 - ? -->
+  <button @click="Descending">내림차순</button>
+  <button @click="StringSort">가나다순</button>
+  <button @click="sortBack">되돌리기</button>
   <!-- 오늘의 5분 숙제 :
   <Card /> 컴포넌트로 상품리스트 보여주기 -->
   <Card @openModal="모달창열렸니=true; 상세페이지아이디=$event" 
@@ -43,6 +53,7 @@ export default {
       // 일단 이렇게 생긴 데이터를 하단에 하나 저장하십시오. 
 
       // products : ['역삼동원룸', '천호동원룸', '마포구원룸']
+      원본 : [...oneroomdata],
       products : ['역삼동원룸', '천호동원룸', '마포구원룸'],
       메뉴들 : ['Home', 'Shop', 'About'],
       // 신고수 : [0, 0, 0],
@@ -54,6 +65,24 @@ export default {
   methods: {
     increase(i) {
       this.신고수[i] ++;
+    },
+    Ascending(){
+      this.원룸들.sort(function(a,b){
+        return a.price - b.price
+      });
+    },
+    Descending(){
+      this.원룸들.sort(function(a,b){
+        return b.price - a.price
+      })
+    },
+    StringSort(){
+      this.원룸들.sort(function(a,b){
+        return a.title.localeCompare(b.title, 'ko');
+      })
+    },
+    sortBack(){
+      this.원룸들 = [...this.원본];
     },
   },
   components : {
@@ -106,10 +135,40 @@ div {
   display: flex;
   flex-direction: column;
 }
-/* .discount {
-  background: #eee;
-  padding: 10px;
-  margin: 10px;
-  border-radius: 5px;
+/* 열기 애니메이션 */
+/* 시작 */
+.fade-enter-from {
+  /* opacity: 0; */
+  transform: translateY(-1000px);
+}
+.fade-enter-active {
+  transition: all 1s;
+}
+/* 끝 */
+.fade-enter-to {
+  /* opacity: 1; */
+  transform: translateY(0px);
+}
+
+/* 닫기 애니메이션 */
+/* 시작 */
+.fade-leave-from {
+  opacity: 1;
+}
+.fade-leave-active {
+  transition: all 1s;
+}
+/* 끝 */
+.fade-leave-to {
+  opacity: 0;
+}
+
+
+/* .start {
+  opacity: 0;
+  transition: all 1s;
+}
+.end {
+  opacity: 1;
 } */
 </style> 
