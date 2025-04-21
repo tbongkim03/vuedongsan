@@ -9,8 +9,8 @@
       <h4>{{ 원룸들[상세페이지아이디].title }}</h4>
       <!-- <h4>상세페이지 내용임</h4>  -->
       <img :src="원룸들[상세페이지아이디].image" :alt="원룸들[상세페이지아이디].id">
-      <h4>{{ 원룸들[상세페이지아이디].price }} 원</h4>
-      <h4>{{ 원룸들[상세페이지아이디].content }}</h4>
+      <p>{{ 원룸들[상세페이지아이디].price }} 원</p>
+      <p>{{ 원룸들[상세페이지아이디].content }}</p>
       <span @click="모달창열렸니=false" style="align-self: flex-end;">닫기</span>
     </div>
     
@@ -29,7 +29,12 @@
   </div>
 
 
+  <!-- <div class="discount">
+    <h4>지금 결제하면 20% 할인</h4>
+  </div> -->
 
+  <!-- 컴포넌트 -->
+  <Discount/>
 
 
   <!-- 오늘의 5분 숙제 : 
@@ -62,6 +67,7 @@
 // 어레이[0]
 
 import oneroomdata from './assets/oneroom.js';
+import Discount from './Discount.vue';
 
 export default {
   name : 'App',
@@ -86,6 +92,7 @@ export default {
     },
   },
   components : {
+    Discount,
   }
 }
 </script>
@@ -132,4 +139,10 @@ div {
   display: flex;
   flex-direction: column;
 }
+/* .discount {
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+} */
 </style> 
