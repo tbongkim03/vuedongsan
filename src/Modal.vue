@@ -10,7 +10,9 @@
       <img :src="원룸들[상세페이지아이디].image" :alt="원룸들[상세페이지아이디].id">
       <p>{{ 원룸들[상세페이지아이디].price }} 원</p>
       <p>{{ 원룸들[상세페이지아이디].content }}</p>
-      <!-- <span @click="모달창열렸니=false" style="align-self: flex-end;">닫기</span> -->
+      <!-- 오늘의 5분 숙제 :
+      모달창 닫기버튼 다시 만들기 -->
+      <span @click="$emit('closeModal')" style="align-self: flex-end;">닫기</span>
     </div>
     
   </div>

@@ -6,7 +6,7 @@
     <!-- <h4 @click="모달창열렸니 = true">{{ value }}</h4> -->
     
     <!-- 이거 어케 하지? -->
-     <h4>{{ 원룸.title }}</h4>
+     <h4 @click="$emit('openModal', 원룸.id)">{{ 원룸.title }}</h4>
     <!-- <h4 @click="모달창열렸니 = true; 상세페이지아이디 = value.id">{{ value.title }}</h4> -->
     
     
