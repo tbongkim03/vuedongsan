@@ -2,9 +2,6 @@
 
   <Modal :원룸들="원룸들" :상세페이지아이디="상세페이지아이디" :모달창열렸니="모달창열렸니"/>
 
-
-
-
   <div class="menu">
     <a v-for="작명 in 메뉴들" :key="작명">{{ 작명 }}</a>
     <!-- <a href="">Home</a>
@@ -12,25 +9,18 @@
     <a href="">About</a> -->
   </div>
 
-
-  <!-- <div class="discount">
-    <h4>지금 결제하면 20% 할인</h4>
-  </div> -->
-
   <!-- 컴포넌트 -->
   <Discount/>
 
   <!-- 오늘의 5분 숙제 :
   <Card /> 컴포넌트로 상품리스트 보여주기 -->
-  <Card :원룸들="원룸들" />
+  <Card :원룸="원룸" v-for="원룸 in 원룸들" :key="원룸"/>
   
 </template>
 
 <script>
 
 // import { isInDestructureAssignment } from 'vue/compiler-sfc';
-
- 
 
 // var 어레이 = [10,20,30];
 // 어레이[0]
