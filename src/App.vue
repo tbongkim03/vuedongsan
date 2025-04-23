@@ -1,7 +1,7 @@
 <template>
 
   <Transition name="fade">
-    <Modal @closeModal="모달창열렸니=false" 
+    <Modal @closeModal="모달창열렸니=false"
     :원룸들="원룸들" 
     :상세페이지아이디="상세페이지아이디" 
     :모달창열렸니="모달창열렸니"/>
@@ -15,7 +15,8 @@
   </div>
 
   <!-- 컴포넌트 -->
-  <Discount/>
+  <Discount :discounting="discounting" 
+  v-if="showDiscount === true "/> 
 
   <button @click="Ascending">오름차순</button>
   <!-- 오늘의 5분 숙제 :
@@ -60,6 +61,9 @@ export default {
       모달창열렸니 : false,
       원룸들 : oneroomdata,
       상세페이지아이디 : 0,
+      showDiscount : true,
+      discounting : 30,
+      month : 1,
     }
   },
   methods: {
@@ -84,6 +88,23 @@ export default {
     sortBack(){
       this.원룸들 = [...this.원본];
     },
+  },
+  // mounted() {
+  //   setTimeout(()=>{
+  //     this.showDiscount = false;
+  //   }, 2000);
+  // },
+  // 숙제 1.
+  // 메인페이지 로드 후 부터
+  // 30% 할인 문구가
+  // 1초마다 1%씩 감소되는 코드 작성하기
+  mounted() {
+    setInterval(()=>{
+      this.discounting --;
+      if (this.discounting < 1) {
+        this.discounting = 0;
+      }
+    }, 1000);
   },
   components : {
     Discount,
@@ -135,6 +156,7 @@ div {
   display: flex;
   flex-direction: column;
 }
+
 /* 열기 애니메이션 */
 /* 시작 */
 .fade-enter-from {

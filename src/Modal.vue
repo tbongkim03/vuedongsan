@@ -10,7 +10,7 @@
             <h4>{{ 원룸들[상세페이지아이디].title }}</h4>
             <p>{{ 원룸들[상세페이지아이디].content }}</p>
             <!-- <input @input="month = $event.target.value"> -->
-            <input v-model="month" @keydown="checkKey">
+            <input v-model="month">
             <p> {{ month }} 개월 선택함 : {{ month * 원룸들[상세페이지아이디].price }} 원</p>
     
             <!-- 오늘의 5분 숙제 :
@@ -36,15 +36,18 @@ export default {
         모달창열렸니: Boolean,
     },
 
-    // 추가 백스페이스는 가능, 스페이스 막기
-    methods: {
-        checkKey(event) {
-            if (event.key === " " || isNaN(event.key) && event.key !== "Backspace") {
-                alert("숫자만 입력하세요");
-                event.preventDefault();
-            }
+    // 숙제 2.
+    // 모달창의 input 안에
+    // 2를 기입했을 때
+    // 알림창을 띄우려면?
+    beforeUpdate(){
+        if (this.month == 2) {
+            alert('이 방은은 3개월부터 계약 가능합니다.');
+            this.month = 3;
         }
+        
     },
+    
     // 오늘의 5분 숙제 : 
 
     // month라는 데이터 항목에 숫자가 아니라 문자가 들어오면 
@@ -52,12 +55,13 @@ export default {
     watch: {
         month(a) {
             // 문제 발생, 백스페이스도 안눌림.
-            if (isNaN(a) == true || $event.key == " ") {
-                alert("숫자만 입력하세요");
+            if (a >= 13) {
+                alert("13 이하의 숫자만 입력하세요");
                 this.month = 1;
             }
         }
-    }
+    },
+    
 }
 </script>
 
